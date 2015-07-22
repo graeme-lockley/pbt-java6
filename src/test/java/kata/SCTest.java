@@ -6,25 +6,25 @@ import za.co.no9.pbt.*;
 import java.util.Arrays;
 import java.util.List;
 
-import static za.co.no9.pbt.Gen.forAll;
-import static za.co.no9.pbt.MyCollections.*;
-import static za.co.no9.pbt.Predicate.IS_NEGATIVE;
 import static kata.SC.add;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import static za.co.no9.pbt.Gen.forAll;
+import static za.co.no9.pbt.MyCollections.*;
+import static za.co.no9.pbt.Predicate.IS_NEGATIVE;
 
 public class SCTest {
     private Generator<Integer> integers = new IntegerInRange(-2000, 2000);
     private Generator<Integer> nonNegativeIntegers = new IntegerInRange(0, 2000);
-    private Generator<List<Integer>> nonEmptyListOfIntegers = new NonEmptyListOf<Integer>(integers);
-    private Generator<List<Integer>> nonEmptyListOfNonNegativeIntegers = new NonEmptyListOf<Integer>(nonNegativeIntegers);
-    private Generator<Character> separators = new FilterGenerator<Character>(new CharacterGenerator(), new Predicate<Character>() {
+    private Generator<List<Integer>> nonEmptyListOfIntegers = integers.nonEmptyList();
+    private Generator<List<Integer>> nonEmptyListOfNonNegativeIntegers = nonNegativeIntegers.nonEmptyList();
+    private Generator<Character> separators = new CharacterGenerator().filter(new Predicate<Character>() {
         @Override
         public boolean evaluate(Character ch) {
             return !(Character.isDigit(ch) || ch == '-' || ch == '[' || ch == ']' || ch == (char) 0);
         }
     });
-    private Generator<List<String>> nonEmptyListOfStringSeparators = new NonEmptyListOf<String>(new AppendGenerator(new NonEmptyListOf<Character>(separators)));
+    private Generator<List<String>> nonEmptyListOfStringSeparators = separators.nonEmptyList().asString().nonEmptyList();
 
     @Test
     public void given_a_blank_should_return_0() throws Exception {

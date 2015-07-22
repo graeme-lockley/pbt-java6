@@ -1,6 +1,6 @@
 package za.co.no9.pbt;
 
-public class IntegerInRange implements Generator<Integer> {
+public class IntegerInRange extends AbstractGenerator<Integer> {
     private final int min;
     private final int max;
 

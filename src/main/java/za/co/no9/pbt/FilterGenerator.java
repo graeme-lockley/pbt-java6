@@ -1,6 +1,6 @@
 package za.co.no9.pbt;
 
-public class FilterGenerator<T> implements Generator<T> {
+public class FilterGenerator<T> extends AbstractGenerator<T> {
     private final Generator<T> generator;
     private final Predicate<T> predicate;
 

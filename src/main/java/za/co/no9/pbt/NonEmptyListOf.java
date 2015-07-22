@@ -3,7 +3,7 @@ package za.co.no9.pbt;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NonEmptyListOf<T> implements Generator<List<T>> {
+public class NonEmptyListOf<T> extends AbstractGenerator<List<T>> {
     private final Generator<T> generator;
 
     public NonEmptyListOf(Generator<T> generator) {
