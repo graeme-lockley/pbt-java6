@@ -37,17 +37,17 @@ public class MyCollections {
         return false;
     }
 
-    public static <S> S reduce(List<S> items, FoldFunction<S, S> foldFunction) {
+    public static <S> S fold(List<S> items, FoldFunction<S, S> foldFunction) {
         Iterator<S> iterator = items.iterator();
         S first = iterator.next();
-        return reduce(iterator, first, foldFunction);
+        return fold(iterator, first, foldFunction);
     }
 
-    public static <S, T> T reduce(List<S> items, T initial, FoldFunction<S, T> foldFunction) {
-        return reduce(items.iterator(), initial, foldFunction);
+    public static <S, T> T fold(List<S> items, T initial, FoldFunction<S, T> foldFunction) {
+        return fold(items.iterator(), initial, foldFunction);
     }
 
-    private static <S, T> T reduce(Iterator<S> items, T initial, FoldFunction<S, T> foldFunction) {
+    private static <S, T> T fold(Iterator<S> items, T initial, FoldFunction<S, T> foldFunction) {
         T result = initial;
         while (items.hasNext()) {
             result = foldFunction.execute(result, items.next());

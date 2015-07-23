@@ -90,7 +90,7 @@ public class SCTest {
     private <T> String mkString(List<T> ns, final List<String> separators) {
         final Generator<Integer> indexGenerator = new IntegerInRange(0, separators.size());
 
-        return reduce(ns, new StringBuilder(), new FoldFunction<T, StringBuilder>() {
+        return fold(ns, new StringBuilder(), new FoldFunction<T, StringBuilder>() {
             @Override
             public StringBuilder execute(StringBuilder result, T next) {
                 if (result.length() > 0) {
@@ -102,7 +102,7 @@ public class SCTest {
     }
 
     private int sum(List<Integer> ns) {
-        return reduce(ns, 0, new FoldFunction<Integer, Integer>() {
+        return fold(ns, 0, new FoldFunction<Integer, Integer>() {
             @Override
             public Integer execute(Integer result, Integer next) {
                 return result + normaliseInt(next);
