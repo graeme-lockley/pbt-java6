@@ -21,7 +21,7 @@ public class MyCollections {
     public static <T> List<T> filter(List<T> items, Predicate<T> predicate) {
         List<T> result = new ArrayList<T>();
         for (T item : items) {
-            if (predicate.evaluate(item)) {
+            if (predicate.test(item)) {
                 result.add(item);
             }
         }
@@ -30,7 +30,7 @@ public class MyCollections {
 
     public static <T> boolean exists(List<T> items, Predicate<T> predicate) {
         for (T item : items) {
-            if (predicate.evaluate(item)) {
+            if (predicate.test(item)) {
                 return true;
             }
         }

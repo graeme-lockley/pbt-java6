@@ -20,7 +20,7 @@ public class SCTest {
     private Generator<List<Integer>> nonEmptyListOfNonNegativeIntegers = nonNegativeIntegers.nonEmptyList();
     private Generator<Character> separators = new CharacterGenerator().filter(new Predicate<Character>() {
         @Override
-        public boolean evaluate(Character ch) {
+        public boolean test(Character ch) {
             return !(Character.isDigit(ch) || ch == '-' || ch == '[' || ch == ']' || ch == (char) 0);
         }
     });
@@ -71,7 +71,7 @@ public class SCTest {
     public void given_integers_with_at_least_one_negative_should_throw_an_exception_with_the_negative_numbers_in_the_exception_message() throws Exception {
         forAll(new FilterGenerator<List<Integer>>(nonEmptyListOfIntegers, new Predicate<List<Integer>>() {
             @Override
-            public boolean evaluate(List<Integer> ns) {
+            public boolean test(List<Integer> ns) {
                 return exists(ns, IS_NEGATIVE);
             }
         }), new Function<List<Integer>>() {

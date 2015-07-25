@@ -14,7 +14,7 @@ public class FilterGenerator<T> extends AbstractGenerator<T> {
         while (true) {
             T result = generator.next();
 
-            if (predicate.evaluate(result)) {
+            if (predicate.test(result)) {
                 return result;
             }
         }
