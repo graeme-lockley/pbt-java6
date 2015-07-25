@@ -4,6 +4,11 @@ import java.util.List;
 
 public abstract class AbstractGenerator<T> implements Generator<T> {
     @Override
+    public String next(String separator) {
+        return next().toString();
+    }
+
+    @Override
     public Generator<List<T>> list() {
         return new ListOf<T>(this);
     }
@@ -25,6 +30,6 @@ public abstract class AbstractGenerator<T> implements Generator<T> {
 
     @Override
     public Generator<String> asString(String separator) {
-        return new AppendGenerator(this, separator);
+        return new AsStringGenerator(this, separator);
     }
 }

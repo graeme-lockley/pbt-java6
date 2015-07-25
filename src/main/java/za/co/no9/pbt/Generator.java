@@ -5,6 +5,8 @@ import java.util.List;
 public interface Generator<T> {
     T next();
 
+    String next(String separator);
+
     Generator<List<T>> list();
 
     Generator<List<T>> nonEmptyList();
