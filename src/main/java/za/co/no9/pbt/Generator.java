@@ -5,6 +5,8 @@ import java.util.List;
 public interface Generator<T> {
     T next();
 
+    Generator<List<T>> list();
+
     Generator<List<T>> nonEmptyList();
 
     Generator<T> filter(Predicate<T> predicate);

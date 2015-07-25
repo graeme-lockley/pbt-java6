@@ -1,22 +1,8 @@
 package za.co.no9.pbt;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class NonEmptyListOf<T> extends AbstractGenerator<List<T>> {
-    private final Generator<T> generator;
-
+public class NonEmptyListOf<T> extends ListOf<T> {
     public NonEmptyListOf(Generator<T> generator) {
-        this.generator = generator;
-    }
-
-    @Override
-    public List<T> next() {
-        int width = new IntegerInRange(1, 10).next();
-        List<T> result = new ArrayList<T>(width);
-        for (int i = 0; i < width; i += 1) {
-            result.add(generator.next());
-        }
-        return result;
+        super(generator);
+        setLengthRange(1, 10);
     }
 }

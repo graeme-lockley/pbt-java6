@@ -54,4 +54,20 @@ public class MyCollections {
         }
         return result;
     }
+
+    public static <T> List<T> times(int n, Supplier<T> supplier) {
+        List<T> result = new ArrayList<T>();
+
+        for (int lp = 0; lp < n; lp += 1) {
+            result.add(supplier.get());
+        }
+
+        return result;
+    }
+
+    public static <T> void each(List<T> items, Consumer<T> consumer) {
+        for (T item : items) {
+            consumer.accept(item);
+        }
+    }
 }

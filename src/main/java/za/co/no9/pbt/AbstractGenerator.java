@@ -4,6 +4,11 @@ import java.util.List;
 
 public abstract class AbstractGenerator<T> implements Generator<T> {
     @Override
+    public Generator<List<T>> list() {
+        return new ListOf<T>(this);
+    }
+
+    @Override
     public Generator<List<T>> nonEmptyList() {
         return new NonEmptyListOf<T>(this);
     }
