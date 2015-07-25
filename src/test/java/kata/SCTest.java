@@ -88,13 +88,13 @@ public class SCTest {
     }
 
     private <T> String mkString(List<T> ns, final List<String> separators) {
-        final Generator<Integer> indexGenerator = new IntegerGenerator(0, separators.size() - 1);
+        final OneOfGenerator<String> separatorsGen = OneOfGenerator.from(separators);
 
         return fold(ns, new StringBuilder(), new FoldFunction<T, StringBuilder>() {
             @Override
             public StringBuilder execute(StringBuilder result, T next) {
                 if (result.length() > 0) {
-                    result.append(separators.get(indexGenerator.next()));
+                    result.append(separatorsGen.next());
                 }
                 return result.append(next);
             }
