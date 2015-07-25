@@ -4,13 +4,17 @@ public class IntegerGenerator extends AbstractGenerator<Integer> {
     private final int min;
     private final int max;
 
-    public IntegerGenerator() {
+    protected IntegerGenerator() {
         this(Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
-    public IntegerGenerator(int min, int max) {
+    protected IntegerGenerator(int min, int max) {
         this.min = min;
         this.max = max;
+    }
+
+    public static Generator<Integer> from(int min, int max) {
+        return new IntegerGenerator(min, max);
     }
 
     @Override

@@ -14,11 +14,11 @@ import static za.co.no9.pbt.MyCollections.*;
 import static za.co.no9.pbt.Predicate.IS_NEGATIVE;
 
 public class SCTest {
-    private Generator<Integer> integers = new IntegerGenerator(-2000, 2000);
-    private Generator<Integer> nonNegativeIntegers = new IntegerGenerator(0, 2000);
+    private Generator<Integer> integers = IntegerGenerator.from(-2000, 2000);
+    private Generator<Integer> nonNegativeIntegers = IntegerGenerator.from(0, 2000);
     private Generator<List<Integer>> nonEmptyListOfIntegers = integers.nonEmptyList();
     private Generator<List<Integer>> nonEmptyListOfNonNegativeIntegers = nonNegativeIntegers.nonEmptyList();
-    private Generator<Character> separators = new CharacterGenerator().filter(new Predicate<Character>() {
+    private Generator<Character> separators = CharacterGenerator.from().filter(new Predicate<Character>() {
         @Override
         public boolean test(Character ch) {
             return !(Character.isDigit(ch) || ch == '-' || ch == '[' || ch == ']' || ch == (char) 0);
