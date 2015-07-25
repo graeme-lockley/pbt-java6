@@ -11,6 +11,6 @@ public class IntegerInRange extends AbstractGenerator<Integer> {
 
     @Override
     public Integer next() {
-        return (int) ((Math.random() * (max - min)) + min);
+        return (int) ((Math.random() * (max - min)) + min + 0.5);
     }
 }
