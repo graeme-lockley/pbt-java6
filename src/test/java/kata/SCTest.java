@@ -88,7 +88,7 @@ public class SCTest {
     }
 
     private <T> String mkString(List<T> ns, final List<String> separators) {
-        final Generator<Integer> indexGenerator = new IntegerInRange(0, separators.size());
+        final Generator<Integer> indexGenerator = new IntegerInRange(0, separators.size() - 1);
 
         return fold(ns, new StringBuilder(), new FoldFunction<T, StringBuilder>() {
             @Override
