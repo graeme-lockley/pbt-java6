@@ -10,12 +10,12 @@ public abstract class AbstractGenerator<T> implements Generator<T> {
 
     @Override
     public Generator<List<T>> list() {
-        return new ListOf<T>(this);
+        return new ListOfGenerator<T>(this);
     }
 
     @Override
     public Generator<List<T>> nonEmptyList() {
-        return new NonEmptyListOf<T>(this);
+        return new NonEmptyListOfGenerator<T>(this);
     }
 
     @Override

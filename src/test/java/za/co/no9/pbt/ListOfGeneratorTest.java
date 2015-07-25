@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 import static za.co.no9.pbt.Gen.forAll;
 import static za.co.no9.pbt.MyCollections.each;
 
-public class ListOfTest {
+public class ListOfGeneratorTest {
     private static final int MINIMUM_LENGTH = 5;
     private static final int MAXIMUM_LENGTH = 15;
 
@@ -18,7 +18,7 @@ public class ListOfTest {
 
     @Test
     public void should_return_lists_within_limits() throws Exception {
-        ListOf<Integer> listOfNumbers = new ListOf<Integer>(new IntegerInRange(MINIMUM_INTEGER, MAXIMUM_INTEGER));
+        ListOfGenerator<Integer> listOfNumbers = new ListOfGenerator<Integer>(new IntegerGenerator(MINIMUM_INTEGER, MAXIMUM_INTEGER));
         listOfNumbers.setLengthRange(MINIMUM_LENGTH, MAXIMUM_LENGTH);
 
         final int ranges[] = new int[2];

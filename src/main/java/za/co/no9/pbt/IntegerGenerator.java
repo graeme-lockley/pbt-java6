@@ -1,10 +1,14 @@
 package za.co.no9.pbt;
 
-public class IntegerInRange extends AbstractGenerator<Integer> {
+public class IntegerGenerator extends AbstractGenerator<Integer> {
     private final int min;
     private final int max;
 
-    public IntegerInRange(int min, int max) {
+    public IntegerGenerator() {
+        this(Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    public IntegerGenerator(int min, int max) {
         this.min = min;
         this.max = max;
     }

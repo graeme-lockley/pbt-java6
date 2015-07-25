@@ -14,8 +14,8 @@ import static za.co.no9.pbt.MyCollections.*;
 import static za.co.no9.pbt.Predicate.IS_NEGATIVE;
 
 public class SCTest {
-    private Generator<Integer> integers = new IntegerInRange(-2000, 2000);
-    private Generator<Integer> nonNegativeIntegers = new IntegerInRange(0, 2000);
+    private Generator<Integer> integers = new IntegerGenerator(-2000, 2000);
+    private Generator<Integer> nonNegativeIntegers = new IntegerGenerator(0, 2000);
     private Generator<List<Integer>> nonEmptyListOfIntegers = integers.nonEmptyList();
     private Generator<List<Integer>> nonEmptyListOfNonNegativeIntegers = nonNegativeIntegers.nonEmptyList();
     private Generator<Character> separators = new CharacterGenerator().filter(new Predicate<Character>() {
@@ -69,7 +69,7 @@ public class SCTest {
 
     @Test
     public void given_integers_with_at_least_one_negative_should_throw_an_exception_with_the_negative_numbers_in_the_exception_message() throws Exception {
-        forAll(new FilterGenerator<List<Integer>>(nonEmptyListOfIntegers, new Predicate<List<Integer>>() {
+        forAll(nonEmptyListOfIntegers.filter(new Predicate<List<Integer>>() {
             @Override
             public boolean test(List<Integer> ns) {
                 return exists(ns, IS_NEGATIVE);
@@ -88,7 +88,7 @@ public class SCTest {
     }
 
     private <T> String mkString(List<T> ns, final List<String> separators) {
-        final Generator<Integer> indexGenerator = new IntegerInRange(0, separators.size() - 1);
+        final Generator<Integer> indexGenerator = new IntegerGenerator(0, separators.size() - 1);
 
         return fold(ns, new StringBuilder(), new FoldFunction<T, StringBuilder>() {
             @Override
@@ -114,4 +114,3 @@ public class SCTest {
         return n < 1001 ? n : 0;
     }
 }
-
