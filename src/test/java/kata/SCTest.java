@@ -9,8 +9,8 @@ import java.util.List;
 import static kata.SC.add;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import static za.co.no9.pbt.Gen.forAll;
 import static za.co.no9.pbt.MyCollections.*;
+import static za.co.no9.pbt.PBT.forAll;
 import static za.co.no9.pbt.Predicate.IS_NEGATIVE;
 
 public class SCTest {

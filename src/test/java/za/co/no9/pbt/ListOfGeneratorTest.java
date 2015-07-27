@@ -6,8 +6,8 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static za.co.no9.pbt.Gen.forAll;
 import static za.co.no9.pbt.MyCollections.each;
+import static za.co.no9.pbt.PBT.forAll;
 
 public class ListOfGeneratorTest {
     private static final int MINIMUM_LENGTH = 5;

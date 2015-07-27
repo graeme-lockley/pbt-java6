@@ -1,6 +1,6 @@
 package za.co.no9.pbt;
 
-public class Gen {
+public class PBT {
     public static int ITERATIONS = 1000;
 
     public static <T> void forAll(Generator<T> gen1, Function<T> function) throws Exception {
