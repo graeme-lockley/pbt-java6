@@ -6,19 +6,19 @@ import java.util.Iterator;
 import java.util.List;
 
 public class MyCollections {
-    public static String join(Collection collection) {
-        return join(collection, "");
+    public static <T> String join(Collection<T> items) {
+        return join(items, "");
     }
 
-    public static String join(Collection collection, String separator) {
+    public static <T> String join(Collection<T> items, String separator) {
         StringBuilder sb = new StringBuilder();
-        for (Object o : collection) {
-            sb.append(separator).append(o.toString());
+        for (T item : items) {
+            sb.append(separator).append(item.toString());
         }
         return sb.substring(separator.length());
     }
 
-    public static <T> List<T> filter(List<T> items, Predicate<T> predicate) {
+    public static <T> List<T> filter(Collection<T> items, Predicate<T> predicate) {
         List<T> result = new ArrayList<T>();
         for (T item : items) {
             if (predicate.test(item)) {
@@ -28,7 +28,7 @@ public class MyCollections {
         return result;
     }
 
-    public static <T> boolean exists(List<T> items, Predicate<T> predicate) {
+    public static <T> boolean exists(Collection<T> items, Predicate<T> predicate) {
         for (T item : items) {
             if (predicate.test(item)) {
                 return true;
@@ -37,13 +37,13 @@ public class MyCollections {
         return false;
     }
 
-    public static <S> S fold(List<S> items, FoldFunction<S, S> foldFunction) {
+    public static <S> S fold(Collection<S> items, FoldFunction<S, S> foldFunction) {
         Iterator<S> iterator = items.iterator();
         S first = iterator.next();
         return fold(iterator, first, foldFunction);
     }
 
-    public static <S, T> T fold(List<S> items, T initial, FoldFunction<S, T> foldFunction) {
+    public static <S, T> T fold(Collection<S> items, T initial, FoldFunction<S, T> foldFunction) {
         return fold(items.iterator(), initial, foldFunction);
     }
 
@@ -65,7 +65,7 @@ public class MyCollections {
         return result;
     }
 
-    public static <T> void each(List<T> items, Consumer<T> consumer) {
+    public static <T> void each(Collection<T> items, Consumer<T> consumer) {
         for (T item : items) {
             consumer.accept(item);
         }
