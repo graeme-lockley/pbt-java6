@@ -9,7 +9,7 @@ Java 6 has very limited support for property based testing primarily because:
 Over the past couple of months I have had a need to create PB tests on projects where the developers associated with
 the project are not comfortable to adopt a new language such as Scala for the purposes of testing.  So I knocked 
 together the following library whilst performing the String Calculator Kata hoping to see what would pop out.  Much to
-my suprise most of the effort went into creating the boilerplate code necessary to support PBT in Java 6 rather than
+my surprise most of the effort went into creating the boilerplate code necessary to support PBT in Java 6 rather than
 the tests themselves.
 
 So this is the output of that Kata - I have moved the Kata into the test package and the boilerplate code and the
