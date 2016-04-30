@@ -15,4 +15,94 @@ the tests themselves.
 So this is the output of that Kata - I have moved the Kata into the test package and the boilerplate code and the
 testing library into the main package.
 
-Enjoy - the code really is simple.
+# The Concept
+
+The scope of a traditional unit test is centered around cherry picking data to validate a specific scenario.  This works
+ well to validate that the code under test is behaving as it is expected to.  The issue with this style of testing is that
+ you only test scenarios that you can think of.  The philosophy behind PBT is to confirm that the invariant between a 
+ component's input and output data is valid for a set of input data.
+   
+# An Example
+
+The structure of a PBT is to describe the inputs to the test using one or more generators and then to validate that, 
+ given the input the results are as expected.
+ 
+Using the [String Calculator](http://osherove.com/tdd-kata-1/) as a backdrop let's look at a number of scenarios.
+
+## Given an integer should return its value
+
+```java
+	import za.co.no9.pbt.Generator;
+	import za.co.no9.pbt.IntegerGenerator;
+	import static za.co.no9.pbt.Gen.forAll;
+
+    @Test
+    public void given_an_integer_should_return_its_value() {
+    	Generator<Integer> integers = IntegerGenerator.from(-2000, 2000);
+    	
+		forAll(integers, new Consumer<Integer>() {
+			public void accept(Integer n) throws Exception {
+				assertEquals(normaliseInt(n), add(n.toString()));
+			}
+		});
+    }
+```
+
+Notes:
+
+* This library is used within a normal jUnit test - there is no need to include any other framework or exotic parent 
+classes.
+* The variable `integers` is a generator that, when the method `next` is invoked on it, will return an `Integer` in the
+range -2000 and 2000.
+* The `forAll` construct accepts one or more generators and a function.  `forAll` then executes the function `za.co.no9.pbt.Gen.ITERATIONS`
+ number of times by invoking this function with values that are supplied by call `next` on each of the generators.  In
+ code the `forAll` method as implemented as
+ 
+ ```java
+     public static <T> void forAll(Generator<T> gen1, Consumer<T> consumer) {
+         for (int i = 0; i < ITERATIONS; i += 1) {
+             consumer.accept(gen1.next());
+         }
+     }
+ ```
+* All of Java's native data types have supported generators - `BooleanGenerator`, `ByteGenerator`, `CharacterGenerator`, 
+`DoubleGenerator`, `FloatGenerator`, `IntegerGenerator`, `LongGenerator` and `ShortGenerator`.
+
+
+## Given a list of integers should return the sum
+
+```java
+	import za.co.no9.pbt.Generator;
+	import za.co.no9.pbt.IntegerGenerator;
+	import static za.co.no9.pbt.Gen.forAll;
+
+    @Test
+    public void given_a_list_of_integers_should_return_its_value() {
+    	Generator<List<Integer>> listOfIntegers = IntegerGenerator.from(-2000, 2000).nonEmptyList();
+    	
+		forAll(nonEmptyListOfNonNegativeIntegers, new Consumer<List<Integer>>() {
+			public void accept(List<Integer> ns) throws Exception {
+				assertEquals(sum(ns), add(mkString(ns, ",")));
+			}
+		});
+    }
+```
+
+Notes:
+
+* The methods `sum` and `mkString` are helper functions.
+* Each generator has a set of methods that can be applied to return a generator collection.  In the example above the
+ variable `listOfIntegers` is a generator that is assembled by calling `nonEmptyList` on the `integers` collection from the 
+ previous example.  In the same way it is possible to create a Set from a generator.
+* A complete set of tests for the kata can be found in the `kata` test package.
+
+
+# Library Dependency
+
+```xml
+	<dependency>
+		<groupId>za.co.no9</groupId>
+		<artifactId>pbt-java6</artifactId>
+		<version>1.0</version>
+	</dependency>
+```
