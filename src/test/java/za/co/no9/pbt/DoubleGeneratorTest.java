@@ -6,7 +6,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static za.co.no9.pbt.PBT.forAll;
+import static za.co.no9.pbt.Gen.forAll;
 
 public class DoubleGeneratorTest {
     private static final double MIN = -3928.32;
@@ -16,9 +16,9 @@ public class DoubleGeneratorTest {
     public void given_a_fixed_width_list_of_doubles_then_the_lists_should_be_of_the_prescribed_length() throws Exception {
         final Generator<List<Double>> listGenerator = DoubleGenerator.from(MIN, MAX).list(10, 10);
 
-        forAll(listGenerator, new Function<List<Double>>() {
+        forAll(listGenerator, new Consumer<List<Double>>() {
             @Override
-            public void test(List<Double> doubles) throws Exception {
+            public void accept(List<Double> doubles) {
                 for (double d : doubles) {
                     assertTrue(d >= MIN && d <= MAX);
                 }

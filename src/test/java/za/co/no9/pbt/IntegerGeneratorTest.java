@@ -6,7 +6,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static za.co.no9.pbt.PBT.forAll;
+import static za.co.no9.pbt.Gen.forAll;
 
 public class IntegerGeneratorTest {
     private static final int MIN = -1244;
@@ -16,9 +16,9 @@ public class IntegerGeneratorTest {
     public void given_a_fixed_width_list_of_generator_then_the_lists_should_be_of_the_prescribed_length() throws Exception {
         final Generator<List<Integer>> listGenerator = IntegerGenerator.from(MIN, MAX).list(10, 10);
 
-        forAll(listGenerator, new Function<List<Integer>>() {
+        forAll(listGenerator, new Consumer<List<Integer>>() {
             @Override
-            public void test(List<Integer> integers) throws Exception {
+            public void accept(List<Integer> integers) {
                 for (int i : integers) {
                     assertTrue(i >= MIN && i <= MAX);
                 }

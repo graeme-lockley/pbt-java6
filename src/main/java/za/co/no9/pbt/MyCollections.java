@@ -65,7 +65,7 @@ public class MyCollections {
         return result;
     }
 
-    public static <T> void each(Collection<T> items, Consumer<T> consumer) {
+    public static <T> void each(Collection<T> items, Consumer<T> consumer) throws Exception {
         for (T item : items) {
             consumer.accept(item);
         }

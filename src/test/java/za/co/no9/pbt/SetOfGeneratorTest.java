@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.Set;
 
 import static org.junit.Assert.assertTrue;
-import static za.co.no9.pbt.PBT.forAll;
+import static za.co.no9.pbt.Gen.forAll;
 
 public class SetOfGeneratorTest {
     private static final int MINIMUM_ITERATION = 5;
@@ -23,9 +23,9 @@ public class SetOfGeneratorTest {
         ranges[0] = MAXIMUM_ITERATION;
         ranges[1] = MINIMUM_ITERATION;
 
-        forAll(setOfNumbers, new Function<java.util.Set<Integer>>() {
+        forAll(setOfNumbers, new Consumer<Set<Integer>>() {
             @Override
-            public void test(Set<Integer> ns) throws Exception {
+            public void accept(Set<Integer> ns) throws Exception {
                 ranges[0] = Math.min(ranges[0], ns.size());
                 ranges[1] = Math.max(ranges[1], ns.size());
 

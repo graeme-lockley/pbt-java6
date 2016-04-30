@@ -9,8 +9,8 @@ import java.util.List;
 import static kata.SC.add;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import static za.co.no9.pbt.Gen.forAll;
 import static za.co.no9.pbt.MyCollections.*;
-import static za.co.no9.pbt.PBT.forAll;
 import static za.co.no9.pbt.Predicate.IS_NEGATIVE;
 
 public class SCTest {
@@ -33,8 +33,8 @@ public class SCTest {
 
     @Test
     public void given_a_non_negative_integer_should_return_its_value_if_less_than_1001_otherwise_0() throws Exception {
-        forAll(nonNegativeIntegers, new Function<Integer>() {
-            public void test(Integer n) throws Exception {
+        forAll(nonNegativeIntegers, new Consumer<Integer>() {
+            public void accept(Integer n) throws Exception {
                 assertEquals(normaliseInt(n), add(n.toString()));
             }
         });
@@ -42,8 +42,8 @@ public class SCTest {
 
     @Test
     public void given_non_negative_integers_separated_with_a_comma_or_newline_should_return_the_sum_of_all_values_less_than_1001() throws Exception {
-        forAll(nonEmptyListOfNonNegativeIntegers, new Function<List<Integer>>() {
-            public void test(List<Integer> ns) throws Exception {
+        forAll(nonEmptyListOfNonNegativeIntegers, new Consumer<List<Integer>>() {
+            public void accept(List<Integer> ns) throws Exception {
                 assertEquals(sum(ns), add(mkString(ns, Arrays.asList(",", "\n"))));
             }
         });
@@ -51,8 +51,8 @@ public class SCTest {
 
     @Test
     public void given_non_negative_integers_separated_by_a_custom_single_character_separator_should_return_the_sum_of_all_less_than_1001() throws Exception {
-        forAll(nonEmptyListOfNonNegativeIntegers, separators, new Function2<List<Integer>, Character>() {
-            public void test(List<Integer> ns, Character sep) throws Exception {
+        forAll(nonEmptyListOfNonNegativeIntegers, separators, new Consumer2<List<Integer>, Character>() {
+            public void accept(List<Integer> ns, Character sep) throws Exception {
                 assertEquals(sum(ns), add("//" + sep + "\n" + join(ns, sep.toString())));
             }
         });
@@ -60,8 +60,8 @@ public class SCTest {
 
     @Test
     public void given_non_negative_integers_separated_by_multiple_multi_character_separator_should_return_the_sum_of_all_less_than_1001() throws Exception {
-        forAll(nonEmptyListOfNonNegativeIntegers, nonEmptyListOfStringSeparators, new Function2<List<Integer>, List<String>>() {
-            public void test(List<Integer> ns, List<String> seps) throws Exception {
+        forAll(nonEmptyListOfNonNegativeIntegers, nonEmptyListOfStringSeparators, new Consumer2<List<Integer>, List<String>>() {
+            public void accept(List<Integer> ns, List<String> seps) throws Exception {
                 assertEquals(sum(ns), add("//[" + join(seps, "][") + "]\n" + mkString(ns, seps)));
             }
         });
@@ -74,9 +74,9 @@ public class SCTest {
             public boolean test(List<Integer> ns) {
                 return exists(ns, IS_NEGATIVE);
             }
-        }), new Function<List<Integer>>() {
+        }), new Consumer<List<Integer>>() {
             @Override
-            public void test(List<Integer> ns) throws Exception {
+            public void accept(List<Integer> ns) throws Exception {
                 try {
                     add(join(ns, ","));
                     fail();

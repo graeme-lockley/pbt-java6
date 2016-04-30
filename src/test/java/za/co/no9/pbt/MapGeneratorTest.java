@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.Map;
 
 import static org.junit.Assert.assertTrue;
-import static za.co.no9.pbt.PBT.forAll;
+import static za.co.no9.pbt.Gen.forAll;
 
 public class MapGeneratorTest {
     @Test
@@ -16,9 +16,9 @@ public class MapGeneratorTest {
         MapGenerator<Long, String> mapGenerator = new MapGenerator<Long, String>(keyGenerator, stringGenerator);
         mapGenerator.setIteration(100, 200);
 
-        forAll(mapGenerator, new Function<Map<Long, String>>() {
+        forAll(mapGenerator, new Consumer<Map<Long, String>>() {
             @Override
-            public void test(Map<Long, String> item) throws Exception {
+            public void accept(Map<Long, String> item) {
                 assertTrue(item.size() <= 200);
                 for (Long key : item.keySet()) {
                     assertTrue(key >= 1000 && key <= 100000);
