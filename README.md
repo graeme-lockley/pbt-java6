@@ -80,7 +80,7 @@ range -2000 and 2000.
     public void given_a_list_of_integers_should_return_its_value() {
     	Generator<List<Integer>> listOfIntegers = IntegerGenerator.from(-2000, 2000).nonEmptyList();
     	
-		forAll(nonEmptyListOfNonNegativeIntegers, new Consumer<List<Integer>>() {
+		forAll(listOfIntegers, new Consumer<List<Integer>>() {
 			public void accept(List<Integer> ns) throws Exception {
 				assertEquals(sum(ns), add(mkString(ns, ",")));
 			}
