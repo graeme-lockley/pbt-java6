@@ -56,7 +56,7 @@ classes.
 range -2000 and 2000.
 * The `forAll` construct accepts one or more generators and a function.  `forAll` then executes the function `za.co.no9.pbt.Gen.ITERATIONS`
  number of times by invoking this function with values that are supplied by call `next` on each of the generators.  In
- code the `forAll` method as implemented as
+ code the `forAll` method is implemented as
  
  ```java
      public static <T> void forAll(Generator<T> gen1, Consumer<T> consumer) {
@@ -106,3 +106,29 @@ Notes:
 		<version>1.0</version>
 	</dependency>
 ```
+
+# Generators
+
+A number of generators are included within this library are listed below.  The code to support these generators is simple.
+I would encourage anyone wishing to use this library to take a look at this code - once you have seen this code you'll 
+realise that creating a generator from scratch is dead easy. 
+
+| Name | Purpose |
+|------|---------|
+| AsStringGenerator | Is constructed with a generator and, when `next` is invoked, will invoke `toString` on the result.  This generator is useful for creating string representations of collections - for example a list of characters generator as a means to create strings. |
+| BooleanGenerator | Returns a `true` or `false` whenever `next` is invoked. |
+| ByteGenerator | Returns a byte value whenever `next` is invoked. |
+| CharacterGenerator | Returns a character value whenever `next` is invoked. |
+| ConstantGenerator | Returns a constant value whenever `next` is invoked.  The constant that is returned is past to the generator when it is constructed. |
+| DoubleGenerator | Returns a double value whenever `next` is invoked. |
+| FilterGenerator | Accepts a generator and a predict in the constructor. Whenever `next` is invoked it'll return a value created by the embedded generator that satisfies the constraint imposed by the predicate. |
+| FloatGenerator | Returns a float value whenever `next` is invoked. |
+| IntegerGenerator | Returns an integer value whenever `next` is invoked. |
+| ListOfGenerator | Returns a list of values where the values have been generated from the passed generator. |
+| LongGenerator | Returns a long value whenever `next` is invoked. |
+| MapGenerator | Returns a map where the keys and values have been generated from two passed generators. |
+| NonEmptyListOfGenerator | Returns a non-empty list of values where the values have been generated from the passed generator. |
+| NonEmptySetOfGenerator | Returns a non-empty set of values where the values have been generated from the passed generator.|
+| OneOfGenerator | Returns a value from a collection of values passed into this generator's constructor. |
+| SetOfGenerator | Returns a set of values where the values have been generated from the passed generator. |
+| ShortGenerator | Returns a short value whenever `next` is invoked. |
