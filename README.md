@@ -107,6 +107,7 @@ Notes:
 	</dependency>
 ```
 
+
 # Generators
 
 A number of generators are included within this library are listed below.  The code to support these generators is simple.
@@ -116,7 +117,7 @@ realise that creating a generator from scratch is dead easy.
 | Name | Purpose |
 |------|---------|
 | AsStringGenerator | Is constructed with a generator and, when `next` is invoked, will invoke `toString` on the result.  This generator is useful for creating string representations of collections - for example a list of characters generator as a means to create strings. |
-| BooleanGenerator | Returns a `true` or `false` whenever `next` is invoked. |
+| BooleanGenerator | Returns `true` or `false` whenever `next` is invoked. |
 | ByteGenerator | Returns a byte value whenever `next` is invoked. |
 | CharacterGenerator | Returns a character value whenever `next` is invoked. |
 | ConstantGenerator | Returns a constant value whenever `next` is invoked.  The constant that is returned is past to the generator when it is constructed. |
