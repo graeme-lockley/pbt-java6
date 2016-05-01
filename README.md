@@ -42,7 +42,7 @@ Using the [String Calculator](http://osherove.com/tdd-kata-1/) as a backdrop let
     	
 		forAll(integers, new Consumer<Integer>() {
 			public void accept(Integer n) throws Exception {
-				assertEquals(normaliseInt(n), add(n.toString()));
+				assertEquals(n, add(n.toString()));
 			}
 		});
     }
